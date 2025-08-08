@@ -7,7 +7,7 @@
 - Node.js v22.18.0
 - Nuxt.js v4
 
-> ![NOTE]
+> [!NOTE]
 > 项目使用 nvm 管理 Node.js 版本，确保在项目根目录下运行 `nvm use` 切换到指定的 Node.js 版本。
 
 ## Setup
