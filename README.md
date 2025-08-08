@@ -1,6 +1,14 @@
-# Nuxt Minimal Starter
+# Nuxt Chat
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+基于 Nuxt.js v4 版本构建的 AI 聊天应用，旨在对 Nuxt 框架的学习和使用。
+
+## 基础环境
+
+- Node.js v22.18.0
+- Nuxt.js v4
+
+> ![NOTE]
+> 项目使用 nvm 管理 Node.js 版本，确保在项目根目录下运行 `nvm use` 切换到指定的 Node.js 版本。
 
 ## Setup
 
