@@ -10,5 +10,8 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  modules: ['@nuxt/ui', '@nuxt/eslint']
+  modules: ['@nuxt/ui', '@nuxt/eslint'],
+  ui: {
+    fonts: false
+  }
 })
