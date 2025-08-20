@@ -10,9 +10,17 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  modules: ['@nuxt/ui', '@nuxt/eslint'],
+  modules: ['@nuxt/ui', '@nuxt/eslint', '@nuxtjs/mdc'],
   ui: {
     fonts: false
+  },
+  mdc: {
+    highlight: {
+      theme: 'material-theme-palenight',
+      langs: [
+        'html','markdown','vue','typescript','javascript'
+      ]
+    }
   },
   runtimeConfig: {
     dashscopeApiKey: "",
