@@ -13,5 +13,12 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/eslint'],
   ui: {
     fonts: false
+  },
+  runtimeConfig: {
+    dashscopeApiKey: "",
+    dashscopeBaseURL: "",
+    public: {
+
+    }
   }
 })
