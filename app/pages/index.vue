@@ -1,6 +1,39 @@
+<script setup lang="ts">
+const appConfig = useAppConfig()
+
+const { createChatAndNavigate } = useChats()
+
+async function handleCreateChat() {
+  await createChatAndNavigate()
+}
+</script>
+
 <template>
-  <UContainer class="flex flex-col items-center justify-center h-screen">
-    <h1 class="text-3xl font-bold">Nuxt Chat</h1>
-    <UButton to="/chat" class="mt-4">开始聊天</UButton>
+  <UContainer class="page-container">
+    <span class="text-2xl font-bold mb-2">
+      {{ appConfig.title }}
+    </span>
+    <UButton class="button" @click="handleCreateChat">
+      开始聊天
+    </UButton>
   </UContainer>
 </template>
+
+<style scoped>
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.button {
+  margin-top: 1rem;
+}
+</style>

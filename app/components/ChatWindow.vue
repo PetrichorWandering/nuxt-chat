@@ -4,7 +4,7 @@ import MarkdownRenderer from './MarkdownRenderer.vue';
 
 const props = defineProps<{
   messages: ChatMessage[],
-  chat: Chat,
+  chat?: Chat,
   typing: boolean
 }>()
 
