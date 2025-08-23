@@ -31,10 +31,14 @@ export default function useChats() {
     options: { projectId?: string} = {}
   ) {
     const chat = createChat(options)
-    await navigateTo(`/chats/${chat.id}`)
+    if (chat.projectId) {
+      navigateTo(`/projects/${chat.projectId}/chats/${chat.id}`)
+    } else {
+      navigateTo(`/chats/${chat.id}`)
+    }
   }
 
-  function chatsInPorject(projectId: string) {
+  function chatsInProject(projectId: string) {
     return chats.value.filter((c) => c.projectId === projectId)
   }
 
@@ -42,6 +46,6 @@ export default function useChats() {
     chats,
     createChat,
     createChatAndNavigate,
-    chatsInPorject,
+    chatsInProject,
   }
 }
