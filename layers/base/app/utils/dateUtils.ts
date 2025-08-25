@@ -1,4 +1,4 @@
-import type { Chat } from '../types'
+import type { Chat } from '../../../chat/shared/types/types'
 
 /**
  * 检查日期是否在指定天数内

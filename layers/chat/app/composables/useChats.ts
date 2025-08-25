@@ -1,5 +1,3 @@
-import type { Chat } from "~~/layers/base/app/types";
-
 export default function useChats() {
   const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
 

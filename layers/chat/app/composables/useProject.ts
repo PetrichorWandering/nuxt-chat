@@ -1,4 +1,4 @@
-import type { Project } from "~~/layers/base/app/types"
+import useProjects from './useProjects'
 
 export default function useProject(projectId: string) {
   const { projects } = useProjects()

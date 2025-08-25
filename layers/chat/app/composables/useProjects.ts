@@ -1,4 +1,4 @@
-import type { Project } from "~~/layers/base/app/types";
+import type { Project } from "~~/layers/chat/shared/types/types";
 
 export default function usePorjects() {
   const projects = useState<Project[]>('projects', () => [
@@ -9,7 +9,9 @@ export default function usePorjects() {
     const id = (projects.value.length + 1).toString()
     const project = {
       id,
-      name: "新的项目"
+      name: "新的项目",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }
 
     projects.value.push(project)
