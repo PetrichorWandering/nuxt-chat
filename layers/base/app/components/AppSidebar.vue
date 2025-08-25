@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui';
-import type { Project, Chat } from '~/types';
+import type { Project, Chat } from '~~/layers/base/app/types';
+import { filterChatsByDateRange } from '../utils/dateUtils';
 
 defineProps<{
   isOpen: boolean,
@@ -95,7 +96,7 @@ async function handleCreateChat() {
 
 <template>
   <aside
-    class="fixed top-16 left-0 bottom-0 w-64 transition-transform duration-300 z-40 bg-accented border-r-accented border-r"
+    class="fixed top-16 left-0 bottom-0 w-64 transition-transform duration-300 z-40 bg-muted border-r-default border-r"
     :class="{ '-translate-x-full': !isOpen }"
   >
     <div
@@ -104,7 +105,7 @@ async function handleCreateChat() {
     >
       <div class="flex justify-between items-center mb-2">
         <h2
-          class="text-sm font-semibold text-muted"
+          class="text-sm font-semibold text-(--ui-text-muted)"
         >
           项目
         </h2>
@@ -129,7 +130,7 @@ async function handleCreateChat() {
     <div v-if="chatsWithoutProject.length > 0" class="overflow-auto p-4">
       <div v-if="todayChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="text-sm font-semibold text-muted">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
             今天
           </h2>
         </div>
@@ -141,7 +142,7 @@ async function handleCreateChat() {
       </div>
       <div v-if="lastWeekChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="text-sm font-semibold text-muted">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
             最近一周
           </h2>
         </div>
@@ -154,7 +155,7 @@ async function handleCreateChat() {
       </div>
       <div v-if="lastMonthChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="text-sm font-semibold text-muted">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
             最近一个月
           </h2>
         </div>
@@ -167,7 +168,7 @@ async function handleCreateChat() {
       </div>
       <div v-if="olderChats.length > 0" class="mb-4">
         <div class="flex justify-between items-center mb-2">
-          <h2 class="text-sm font-semibold text-muted">
+          <h2 class="text-sm font-semibold text-(--ui-text-muted)">
             更早的聊天
           </h2>
         </div>

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import type { ChatMessage, Chat } from '~/types'
-import MarkdownRenderer from './MarkdownRenderer.vue';
+import type { ChatMessage, Chat } from '~~/layers/base/app/types'
 
 const props = defineProps<{
   messages: ChatMessage[],

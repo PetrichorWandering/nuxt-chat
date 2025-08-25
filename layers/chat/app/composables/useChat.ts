@@ -1,8 +1,8 @@
-import type { ChatMessage } from '../types'
+import type { ChatMessage } from '~~/layers/base/app/types'
 
 export default function useChat(chatId: string) {
   const { chats } = useChats()
-  const chat = computed(() => 
+  const chat = computed(() =>
     chats.value.find((c) => c.id === chatId)
   )
   const messages = computed<ChatMessage[]>(

@@ -26,7 +26,7 @@ export function filterChatsByDateRange(
   chats: Chat[],
   startDays: number,
   endDays?: number
-){
+) {
   return chats.filter((chat) => {
     const date = new Date(chat.updatedAt)
     if (endDays === undefined) {
@@ -37,8 +37,8 @@ export function filterChatsByDateRange(
       isWithDays(date, endDays)
     )
   })
-  .sort((a, b) => 
-    new Date(b.updatedAt).getTime() - 
-    new Date(a.updatedAt).getTime()
-  )
+    .sort((a, b) =>
+      new Date(b.updatedAt).getTime() -
+      new Date(a.updatedAt).getTime()
+    )
 }

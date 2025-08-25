@@ -1,4 +1,4 @@
-import type { Project } from "~/types";
+import type { Project } from "~~/layers/base/app/types";
 
 export default function usePorjects() {
   const projects = useState<Project[]>('projects', () => [

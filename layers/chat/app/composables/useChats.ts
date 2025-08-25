@@ -1,4 +1,4 @@
-import type { Chat } from "~/types";
+import type { Chat } from "~~/layers/base/app/types";
 
 export default function useChats() {
   const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
@@ -7,7 +7,7 @@ export default function useChats() {
    * 创建一个新的聊天
    */
   function createChat(
-    options: { projectId?: string} = {}
+    options: { projectId?: string } = {}
   ) {
     const id = (chats.value.length + 1).toString()
     const chat: Chat = {
@@ -28,7 +28,7 @@ export default function useChats() {
    * 创建一个新的聊天并导航到它
    */
   async function createChatAndNavigate(
-    options: { projectId?: string} = {}
+    options: { projectId?: string } = {}
   ) {
     const chat = createChat(options)
     if (chat.projectId) {
