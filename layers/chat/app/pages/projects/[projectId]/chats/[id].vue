@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Chat } from '~~/layers/chat/shared/types/types'
-
 const route = useRoute()
 const {
   chat: chatFromChats,
