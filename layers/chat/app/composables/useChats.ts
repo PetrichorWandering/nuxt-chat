@@ -1,5 +1,15 @@
 export default function useChats() {
-  const chats = useState<Chat[]>('chats', () => [MOCK_CHAT])
+  const chats = useState<Chat[]>('chats', () => [])
+  const { data, execute, status } = useFetch<Chat[]>('/api/chats', {
+    immediate: false,
+    default: ()=> [],
+  })
+    
+  async function fetchChats() {
+    if (status.value !== 'idle') return
+    await execute()
+    chats.value = data.value
+  }
 
   /**
    * 创建一个新的聊天
@@ -45,5 +55,6 @@ export default function useChats() {
     createChat,
     createChatAndNavigate,
     chatsInProject,
+    fetchChats,
   }
 }
