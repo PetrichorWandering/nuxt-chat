@@ -4,7 +4,7 @@ const projects: Project[] = [MOCK_PROJECT]
 
 export function getAllProjects(): Project[] {
   return [...projects].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
   )
 }
 
@@ -18,7 +18,7 @@ export async function createProject(data: {
   const now = new Date()
   const newProject: Project = {
     id: uuidv4(),
-    name: data.name,
+    name: data.name || '新项目',
     createdAt: now,
     updatedAt: now,
   }

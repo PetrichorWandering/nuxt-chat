@@ -14,22 +14,23 @@ export default function useChats() {
   /**
    * 创建一个新的聊天
    */
-  function createChat(
-    options: { projectId?: string } = {}
+  async function createChat(
+    options: { 
+      projectId?: string; 
+      title?: string 
+    } = {}
   ) {
-    const id = (chats.value.length + 1).toString()
-    const chat: Chat = {
-      id,
-      title: `聊天 ${id}`,
-      messages: [],
-      projectId: options.projectId,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }
+    const newChat = await $fetch<Chat>('/api/chats', {
+      method: 'POST',
+      body: {
+        projectId: options.projectId,
+        title: options.title,
+      },
+    })
 
-    chats.value.push(chat)
+    chats.value.push(newChat)
 
-    return chat
+    return newChat
   }
 
   /**
@@ -38,7 +39,7 @@ export default function useChats() {
   async function createChatAndNavigate(
     options: { projectId?: string } = {}
   ) {
-    const chat = createChat(options)
+    const chat = await createChat(options)
     if (chat.projectId) {
       navigateTo(`/projects/${chat.projectId}/chats/${chat.id}`)
     } else {
