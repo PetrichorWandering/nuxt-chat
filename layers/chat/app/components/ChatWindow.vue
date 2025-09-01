@@ -3,7 +3,7 @@ import type { ChatMessage, Chat } from '~~/layers/chat/shared/types/types'
 
 const props = defineProps<{
   messages: ChatMessage[],
-  chat?: Chat,
+  chat: Chat,
   typing: boolean
 }>()
 
@@ -16,6 +16,20 @@ function handleSendMessage(message: string) {
 }
 
 watch(() => props.messages, pinToBottom, { deep: true })
+
+const route = useRoute()
+const isOnProjectPage = computed(() => !!route.params.projectId)
+
+const isAssignModalOpen = ref(false)
+
+function openAssignModal() {
+  isAssignModalOpen.value = true
+}
+
+function closeAssignModal() {
+  isAssignModalOpen.value = false
+}
+
 </script>
 
 <template>
@@ -32,6 +46,16 @@ watch(() => props.messages, pinToBottom, { deep: true })
           <h1 class="title">
             <TypewriterText :text="chat?.title || '无标题聊天'" />
           </h1>
+          <UButton
+            v-if="!isOnProjectPage"
+            color="neutral"
+            variant="soft"
+            icon="i-heroicons-folder-plus"
+            size="sm"
+            @click="openAssignModal"
+          >
+            分配项目
+          </UButton>
         </div>
         <div class="messages-container">
           <div 
@@ -69,6 +93,11 @@ watch(() => props.messages, pinToBottom, { deep: true })
       </template>
     </UContainer>
     
+    <LazyAssignToProjectModal 
+      v-if="isAssignModalOpen"
+      :chat-id="chat.id"
+      @close="closeAssignModal"
+    />
   </div>
 </template>
 

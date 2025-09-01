@@ -45,12 +45,18 @@ export const UpdateProjectSchema = z
 export const CreateChatSchema = z
   .object({
     title: z.string().min(1).optional(),
-    projectId: z.string().uuid().optional(),
+    projectId: z.uuidv4().optional(),
   })
   .strict()
 
 export const UpdateChatTitleSchema = z
   .object({
     message: z.string().min(1),
+  })
+  .strict()
+
+  export const UpdateChatSchema = z
+  .object({
+    projectId: z.uuidv4(),
   })
   .strict()

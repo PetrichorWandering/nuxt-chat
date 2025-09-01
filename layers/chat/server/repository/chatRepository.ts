@@ -32,7 +32,7 @@ export async function getAllChats(): Promise<Chat[]> {
       }
     })
   )
-  transformedChats = transformedChats.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+  transformedChats = transformedChats.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
 
   return transformedChats
 }

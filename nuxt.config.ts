@@ -2,7 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint'],
+  // 添加 extends 配置，确保 layers 正确加载
+  extends: [
+    './layers/base',
+    './layers/chat',
+    './layers/marketing'
+  ],
+
+  modules: ['@nuxt/eslint', '@nuxt/image'],
+
+  // image: {
+  //   // 确保在开发模式下正确处理静态资源
+  //   provider: 'none',
+  // },
+
   ui: {
     fonts: false
   },

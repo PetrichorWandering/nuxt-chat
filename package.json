@@ -14,6 +14,7 @@
   "dependencies": {
     "@ai-sdk/deepseek": "0.2.16",
     "@nuxt/eslint": "1.8.0",
+    "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "^3.3.0",
     "@nuxtjs/mdc": "0.17.2",
     "@tailwindcss/vite": "^4.1.11",
@@ -29,5 +30,10 @@
   "devDependencies": {
     "@types/uuid": "^10.0.0",
     "typescript": "^5.9.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "ipx": "^3.0.0"
+    }
   }
 }

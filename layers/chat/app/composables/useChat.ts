@@ -24,11 +24,11 @@ export default function useChat(chatId: string) {
     const hasExistingMessages = messages.value.length > 1
     const isRequestInProgress = status.value !== 'idle'
     const shouldSkipDueToExistingState = !refresh && (hasExistingMessages || isRequestInProgress)
-    
+
     if (shouldSkipDueToExistingState || !chat.value) {
       return
     }
-    
+
     await execute()
     chat.value.messages = data.value
   }
@@ -66,7 +66,7 @@ export default function useChat(chatId: string) {
 
     const userMessageIndex = messages.value.length - 1
 
-    try{
+    try {
       const newMessage = await $fetch<ChatMessage>(
         `/api/chats/${chatId}/messages`,
         {
@@ -134,10 +134,51 @@ export default function useChat(chatId: string) {
     chat.value.updatedAt = new Date()
   }
 
+  async function assignToProject(projectId: string | null) {
+    if (!chat.value) return
+
+    const originalProjectId = chat.value.projectId
+
+    // Optimistically update the chat
+    chat.value.projectId = projectId || undefined
+    try {
+      const updatedChat = await $fetch<Chat>(
+        `/api/chats/${chatId}`,
+        {
+          method: 'PUT',
+          body: {
+            projectId,
+          },
+        }
+      )
+
+      // Update the chat in the chats list
+      const chatIndex = chats.value.findIndex(
+        (c) => c.id === chatId
+      )
+      if (chatIndex !== -1 && chats.value[chatIndex]) {
+        chats.value[chatIndex].projectId =
+          updatedChat.projectId
+        chats.value[chatIndex].updatedAt =
+          updatedChat.updatedAt
+      }
+    } catch (error) {
+      console.error(
+        'Error assigning chat to project',
+        error
+      )
+      // Revert optimistic update
+      chat.value.projectId = originalProjectId
+      throw error
+    }
+
+  }
+
   return {
     chat,
     messages,
     sendMessage,
     fetchMessages,
+    assignToProject,
   }
 }
