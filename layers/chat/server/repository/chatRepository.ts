@@ -8,16 +8,6 @@ async function getChats(): Promise<Chat[]> {
   let chats = await storage.getItem(chatsKey)
   if (chats === null) {
     chats = [MOCK_CHAT]
-    chats = chats.map(chat => ({
-      ...chat,
-      createdAt: new Date(chat.createdAt),
-      updatedAt: new Date(chat.updatedAt),
-      messages: chat.messages.map(message => ({
-        ...message,
-        createdAt: new Date(message.createdAt),
-        updatedAt: new Date(message.updatedAt),
-      }))
-    }))
     await saveChats(chats)
   }
 
@@ -143,7 +133,7 @@ export async function getMessagesByChatId(
   if (!chat) return []
 
   return [...chat.messages].sort(
-    (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
   )
 }
 
