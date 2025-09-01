@@ -2,14 +2,17 @@ import {
   createMessageForChat, 
   getMessagesByChatId 
 } from "~~/layers/chat/server/repository/chatRepository"
-import { generateChatResponse } from "~~/layers/chat/server/services/ai-service"
+import { createDeepSeekModel, generateChatResponse } from "~~/layers/chat/server/services/ai-service"
 
 export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
-  const history = getMessagesByChatId(id)
+  const history = await getMessagesByChatId(id)
 
-  const reply = await generateChatResponse(history)
+  const deepseekApiKey = useRuntimeConfig().deepseekApiKey
+  const deepseekModel = createDeepSeekModel(deepseekApiKey)
+
+  const reply = await generateChatResponse(deepseekModel, history)
 
   return createMessageForChat({
     chatId: id,

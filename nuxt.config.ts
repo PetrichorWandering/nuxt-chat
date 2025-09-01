@@ -12,4 +12,23 @@ export default defineNuxtConfig({
       strict: false
     }
   },
+  nitro: {
+    storage: {
+      db: {
+        driver: 'fs',
+        base: './.data'
+      },
+    },
+  },
+
+  $production: {
+    nitro: {
+      storage: {
+        db: {
+          driver: 'netlify-blobs',
+          base: 'db'
+        },
+      },
+    },
+  }
 })

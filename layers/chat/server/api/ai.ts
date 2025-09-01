@@ -1,17 +1,32 @@
-import { generateChatResponse } from "../services/ai-service"
-
+import { createDeepSeekModel, generateChatResponse } from "../services/ai-service"
+import { ChatMessageSchema } from '../schemas'
+import type { ChatMessage } from "../../shared/types/types"
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const { messages } = body
-  const id = messages.length.toString()
 
-  const chatAnswer = await generateChatResponse(messages)
+  const { success, data } = await readValidatedBody(
+    event,
+    ChatMessageSchema.safeParse
+  )
+
+  if (!success) {
+    return 400
+  }
+
+  const { messages } = data as {
+    messages: ChatMessage[]
+    chatId: string
+  }
+
+  const deepseekApiKey = useRuntimeConfig().deepseekApiKey
+  const deepseekModel = createDeepSeekModel(deepseekApiKey)
+
+  const chatAnswer = await generateChatResponse(deepseekModel, messages)
 
   return {
-    id,
+    id: messages.length.toString(),
     role: 'assistant',
-    content: chatAnswer.content,
+    content: chatAnswer,
   }
 
 })
