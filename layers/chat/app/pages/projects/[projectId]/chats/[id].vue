@@ -13,7 +13,7 @@ if (!chatFromChats.value) {
   await navigateTo(`/projects/${route.params.projectId}`, {replace: true})
 }
 
-const chat = computed(() => chatFromChats.value as Chat)
+const chat = computed(() => chatFromChats.value)
 const typing = ref(false)
 
 const handleSendMessage = async (message: string) => {
@@ -35,5 +35,5 @@ useHead({
 </script>
 
 <template>
-  <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
+  <ChatWindow v-if="chat" :typing :chat :messages @send-message="handleSendMessage" />
 </template>

@@ -9,7 +9,10 @@ export default defineEventHandler(async (event) => {
     UpdateChatTitleSchema.safeParse
   )
   if (!success) {
-    return 400
+    throw createError({
+      statusCode: 400,
+      message: 'Bad Request',
+    })
   }
 
   const deepseekApiKey = useRuntimeConfig().deepseekApiKey

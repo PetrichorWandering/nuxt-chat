@@ -7,7 +7,10 @@ export default defineEventHandler(async (event) => {
     CreateProjectSchema.safeParse
   )
   if (!success) {
-    return 400
+    throw createError({
+      statusCode: 400,
+      message: 'Bad Request',
+    })
   }
   return createProject(data)
 })

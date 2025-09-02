@@ -12,7 +12,7 @@ await fetchMessages()
 if (!chatFromChats.value) {
   await navigateTo('/', {replace: true})
 }
-const chat = computed(() => chatFromChats.value as Chat)
+const chat = computed(() => chatFromChats.value)
 
 const typing = ref(false)
 
@@ -29,6 +29,10 @@ const title = computed(() =>
     : appConfig.title
 )
 
+async function handleError() {
+  await navigateTo('/', { replace: true })
+}
+
 useHead({
   title: title
 })
@@ -36,7 +40,36 @@ useHead({
 
 <template>
   <div class="h-full flex flex-col">
-    <ChatWindow :typing :chat :messages @send-message="handleSendMessage" />
+    <NuxtErrorBoundary>
+      <ChatWindow v-if="chat" :typing :chat :messages @send-message="handleSendMessage" />
+
+      <template #error="{ error }">
+        <UContainer
+          class="flex justify-center items-center h-full p-4"
+        >
+          <UCard variant="soft" class="min-w-md">
+            <template #header>
+              <h1 class="text-lg font-bold">
+                Error - {{ error.message }}
+              </h1>
+            </template>
+
+            <p>{{ error.message }}</p>
+
+            <UButton
+              class="mt-4"
+              color="primary"
+              variant="soft"
+              icon="i-heroicons-arrow-left"
+              @click="handleError"
+            >
+              返回首页
+            </UButton>
+          </UCard>
+        </UContainer>
+      </template>
+    </NuxtErrorBoundary>
+    
   </div>
 </template>
 

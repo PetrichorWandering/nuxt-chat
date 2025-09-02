@@ -8,9 +8,17 @@ export default defineEventHandler(async (event) => {
     UpdateProjectSchema.safeParse
   )
   const project = getProjectById(id)
-  if (!project) return 404
+  if (!project) {
+    throw createError({
+      statusCode: 404,
+      message: 'Project Not Found',
+    })
+  }
   if (!success) {
-    return 400
+    throw createError({
+      statusCode: 400,
+      message: 'Bad Request',
+    })
   }
   
   return updateProject(id, { name: data.name })
