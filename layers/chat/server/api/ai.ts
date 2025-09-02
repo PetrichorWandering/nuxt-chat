@@ -1,6 +1,5 @@
 import { createDeepSeekModel, generateChatResponse } from "../services/ai-service"
 import { ChatMessageSchema } from '../schemas'
-import type { ChatMessage } from "../../shared/types/types"
 
 export default defineEventHandler(async (event) => {
 
@@ -17,7 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { messages } = data as {
-    messages: ChatMessage[]
+    messages: Message[]
     chatId: string
   }
 

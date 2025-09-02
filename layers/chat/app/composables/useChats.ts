@@ -1,6 +1,6 @@
 export default function useChats() {
-  const chats = useState<Chat[]>('chats', () => [])
-  const { data, execute, status } = useFetch<Chat[]>('/api/chats', {
+  const chats = useState<ChatWithMessages[]>('chats', () => [])
+  const { data, execute, status } = useFetch<ChatWithMessages[]>('/api/chats', {
     immediate: false,
     default: ()=> [],
   })
@@ -23,7 +23,7 @@ export default function useChats() {
     await Promise.all(
       recentChats.map(async (chat) => {
         try {
-          const messages = await $fetch<ChatMessage[]>(
+          const messages = await $fetch<Message[]>(
             `/api/chats/${chat.id}/messages`
           )
 
@@ -52,7 +52,7 @@ export default function useChats() {
       title?: string 
     } = {}
   ) {
-    const newChat = await $fetch<Chat>('/api/chats', {
+    const newChat = await $fetch<ChatWithMessages>('/api/chats', {
       method: 'POST',
       body: {
         projectId: options.projectId,

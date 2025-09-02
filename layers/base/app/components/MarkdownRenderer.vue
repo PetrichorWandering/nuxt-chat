@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-defineProps<{ content: string}>()
+defineProps<{ content: string, cacheKey: string }>()
 </script>
 
 <template>
-  <MDC :value="content" class="markdown-content"/>
+  <MDC :cache-key="cacheKey" :value="content" class="markdown-content"/>
 </template>
 
 <style>
