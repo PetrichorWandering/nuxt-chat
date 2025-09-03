@@ -31,7 +31,7 @@ function handleToggleSidebar() {
       {{ appConfig.title }}
     </div>
     <div class="header-right">
-      
+      <ProfileMenu />
     </div>
   </div>
 </template>

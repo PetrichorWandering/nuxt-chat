@@ -2,13 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  // 添加 extends 配置，确保 layers 正确加载
-  extends: [
-    './layers/base',
-    './layers/chat',
-    './layers/marketing'
-  ],
-
   modules: ['@nuxt/eslint', '@nuxt/image'],
 
   // image: {
@@ -33,15 +26,4 @@ export default defineNuxtConfig({
       },
     },
   },
-
-  $production: {
-    nitro: {
-      storage: {
-        db: {
-          driver: 'netlify-blobs',
-          base: 'db'
-        },
-      },
-    },
-  }
 })

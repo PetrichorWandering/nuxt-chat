@@ -4,7 +4,7 @@ import type {
   Project as PrismaProject,
   MessageRole as PrismaMessageRole,
   Prisma,
-} from '../../../../app/generated/prisma/client'
+} from '@prisma/client'
 
 export type Message = PrismaMessage
 export type Chat = PrismaChat
